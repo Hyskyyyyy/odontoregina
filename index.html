@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Odonto Regina - Clínica Odontológica em Goiânia. Dra. Alessandra Agnello e Dr. Marco Agnello. Seu sorriso, nossa especialidade. Agende sua consulta!">
+  <title>Odonto Regina | Seu sorriso, nossa especialidade</title>
+
+  <!-- Google Fonts Imports -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap');
+  </style>
+
+  <!-- CSS Custom Properties & Base Styles -->
+  <style>
+    :root {
+      --color-primary: #7A1515;
+      --color-primary-dark: #5C0F0F;
+      --color-gold: #C9A96E;
+      --color-gold-light: #E5D3B3;
+      --color-cream: #FDF8F3;
+      --color-white: #FFFFFF;
+      --color-text: #1A1A1A;
+      --color-text-light: #6B5B5B;
+      --color-shadow-wine: rgba(122, 21, 21, 0.12);
+      --color-shadow-gold: rgba(201, 169, 110, 0.2);
+      
+      --font-display: 'Playfair Display', serif;
+      --font-script: 'Dancing Script', cursive;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    /* Reset & Base Setup */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text);
+      background-color: var(--color-cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-cream);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-primary);
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary-dark);
+    }
+
+    a, button {
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    /* Layout Utilities */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Reusable Headers in the requested dual-typography signature */
+    .section-title-container {
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .title-main {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--color-primary);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: -5px;
+    }
+
+    .title-sub {
+      display: block;
+      font-family: var(--font-script);
+      font-size: 2.2rem;
+      color: var(--color-gold);
+      transform: translateY(-8px);
+      font-weight: 700;
+    }
+
+    /* Contrast adjustment for dark backgrounds */
+    .bg-dark .title-main {
+      color: var(--color-white);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .bg-dark .title-sub {
+      color: var(--color-gold);
+    }
+
+    /* Animations via Intersection Observer */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Background texture utility */
+    .bg-dots {
+      background-color: var(--color-primary);
+      background-image: radial-gradient(rgba(201, 169, 110, 0.15) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      position: relative;
+    }
+
+    /* 1. HEADER & NAVIGATION */
+    .header-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background-color: rgba(253, 248, 243, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+      transition: all 0.4s ease;
+    }
+
+    .header-nav.scrolled {
+      background-color: var(--color-cream);
+      box-shadow: 0 4px 30px var(--color-shadow-wine);
+      padding: 10px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+      transition: height 0.4s ease;
+    }
+
+    .header-nav.scrolled .nav-container {
+      height: 70px;
+    }
+
+    /* Brand Logo */
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon-wrapper {
+      width: 48px;
+      height: 48px;
+    }
+
+    .logo-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .logo-text-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-brand-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      color: var(--color-primary);
+      line-height: 1.1;
+    }
+
+    .logo-sub {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gold);
+    }
+
+    /* Navigation Menu */
+    .nav-menu {
+      display: none;
+    }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--color-text);
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--color-primary);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .btn-header-cta {
+      display: none;
+    }
+
+    /* Mobile hamburger toggler */
+    .nav-toggle-btn {
+      background: none;
+      width: 32px;
+      height: 24px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 110;
+    }
+
+    .nav-toggle-btn span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: var(--color-primary);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-toggle-btn.open span:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+
+    .nav-toggle-btn.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle-btn.open span:nth-child(3) {
+      transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* Mobile navigation drawer */
+    .mobile-menu-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 360px;
+      height: 100vh;
+      background-color: var(--color-cream);
+      box-shadow: -10px 0 30px var(--color-shadow-wine);
+      z-index: 105;
+      padding: 100px 32px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .mobile-menu-drawer.open {
+      right: 0;
+    }
+
+    .mobile-menu-drawer .nav-link {
+      font-size: 1.2rem;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+    }
+
+    .mobile-menu-drawer .btn-drawer-cta {
+      margin-top: auto;
+      text-align: center;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 2px solid transparent;
+    }
+
+    .mobile-menu-drawer .btn-drawer-cta:hover {
+      background-color: var(--color-primary-dark);
+      border-color: var(--color-gold);
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(92, 15, 15, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 102;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* 2. HERO SECTION */
+    .hero-section {
+      padding: 140px 0 80px;
+      overflow: hidden;
+      color: var(--color-white);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .badge-google-ratings {
+      background-color: var(--color-gold);
+      color: var(--color-primary-dark);
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 15px rgba(201, 169, 110, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .hero-main-title {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: -5px;
+    }
+
+    .hero-script-title {
+      display: block;
+      font-family: var(--font-script);
+      font-size: 2.5rem;
+      color: var(--color-gold);
+      transform: translateY(-8px);
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    .hero-description {
+      font-size: 1.05rem;
+      font-weight: 300;
+      max-width: 550px;
+      margin-bottom: 36px;
+      opacity: 0.9;
+    }
+
+    .hero-cta-buttons {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 16px;
+    }
+
+    .btn-hero-primary {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      border: 2px solid var(--color-gold);
+      padding: 16px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-align: center;
+      box-shadow: 0 6px 20px var(--color-shadow-wine);
+    }
+
+    .btn-hero-primary:hover {
+      background-color: var(--color-gold);
+      color: var(--color-primary);
+      box-shadow: 0 8px 25px var(--color-shadow-gold);
+    }
+
+    .btn-hero-secondary {
+      background-color: transparent;
+      color: var(--color-white);
+      border: 2px solid var(--color-white);
+      padding: 16px 28px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .btn-hero-secondary:hover {
+      background-color: var(--color-white);
+      color: var(--color-primary);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-visual-frame {
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, var(--color-primary-dark), rgba(122, 21, 21, 0.7));
+      border-radius: 24px;
+      border: 3px solid var(--color-gold);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-svg {
+      width: 80%;
+      height: 80%;
+    }
+
+    /* 3. NUMBERS/CREDENTIALS SECTION */
+    .credentials-section {
+      background-color: var(--color-primary-dark);
+      border-top: 2px solid var(--color-gold);
+      border-bottom: 2px solid var(--color-gold);
+      padding: 30px 0;
+    }
+
+    .credentials-flex {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .credential-block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .credential-number {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--color-gold);
+      line-height: 1.1;
+    }
+
+    .credential-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--color-cream);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+
+    .credential-stars {
+      color: var(--color-gold);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    /* 4. SERVICES SECTION */
+    .services-section {
+      padding: 100px 0;
+      background-color: var(--color-cream);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .service-card {
+      background-color: var(--color-white);
+      border-radius: 16px;
+      border-top: 4px solid var(--color-primary);
+      padding: 36px 30px;
+      box-shadow: 0 6px 20px var(--color-shadow-wine);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      height: 100%;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(122, 21, 21, 0.18);
+      border-top-color: var(--color-gold);
+    }
+
+    .service-icon-wrapper {
+      width: 54px;
+      height: 54px;
+      background-color: var(--color-cream);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: var(--color-primary);
+      border: 1px solid rgba(201, 169, 110, 0.2);
+    }
+
+    .service-card:hover .service-icon-wrapper {
+      background-color: var(--color-primary);
+      color: var(--color-gold);
+      transform: scale(1.1);
+    }
+
+    .service-card-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+
+    .service-card-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-light);
+      font-weight: 400;
+    }
+
+    /* 5. BEFORE & AFTER SECTION */
+    .comparison-section {
+      padding: 100px 0;
+      background-color: var(--color-cream);
+      border-top: 1px solid rgba(201, 169, 110, 0.15);
+      position: relative;
+    }
+
+    .comparison-wrapper {
+      max-width: 650px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .comparison-subtitle {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--color-text-light);
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+
+    /* The Slider Core Elements */
+    .slider-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 400 / 422;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px var(--color-shadow-wine);
+      border: 4px solid var(--color-white);
+      user-select: none;
+      background-color: #F0A8A8; /* Gum base color fallback */
+    }
+
+    .slider-before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .slider-after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+    }
+
+    .slider-viewport img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slider-badge {
+      position: absolute;
+      top: 16px;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      z-index: 4;
+    }
+
+    .badge-after-label {
+      left: 16px;
+      background-color: var(--color-gold);
+      color: var(--color-primary-dark);
+    }
+
+    .badge-before-label {
+      right: 16px;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      border: 1px solid var(--color-gold);
+    }
+
+    .slider-handle-bar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      background-color: var(--color-gold);
+      z-index: 3;
+      pointer-events: none;
+      transform: translateX(-50%);
+    }
+
+    .slider-handle-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 46px;
+      height: 46px;
+      background-color: var(--color-white);
+      border: 3px solid var(--color-gold);
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .slider-handle-button svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-primary);
+    }
+
+    .slider-native-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 6;
+      cursor: ew-resize;
+    }
+
+    /* Watermark signature */
+    .signature-watermark-wrapper {
+      margin-top: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .signature-watermark {
+      font-family: var(--font-script);
+      font-size: 2.4rem;
+      color: var(--color-primary);
+      opacity: 0.8;
+      line-height: 1;
+    }
+
+    .signature-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gold);
+      margin-top: 4px;
+    }
+
+    .btn-comparison-cta {
+      margin-top: 40px;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      border: 2px solid var(--color-gold);
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 6px 20px var(--color-shadow-wine);
+    }
+
+    .btn-comparison-cta:hover {
+      background-color: var(--color-gold);
+      color: var(--color-primary);
+      box-shadow: 0 8px 25px var(--color-shadow-gold);
+    }
+
+    /* 6. EQUIPE (OUR TEAM) */
+    .team-section {
+      padding: 100px 0;
+      color: var(--color-white);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .team-card {
+      background-color: rgba(92, 15, 15, 0.4);
+      backdrop-filter: blur(8px);
+      border: 2px solid var(--color-gold);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(92, 15, 15, 0.6);
+      box-shadow: 0 15px 35px rgba(201, 169, 110, 0.15);
+    }
+
+    .avatar-wrapper {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid var(--color-gold);
+      padding: 5px;
+      margin-bottom: 24px;
+      background-color: rgba(253, 248, 243, 0.05);
+    }
+
+    .avatar-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary-dark);
+      font-weight: 700;
+      font-size: 2.2rem;
+      font-family: var(--font-display);
+      text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 6px;
+    }
+
+    .team-cro {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gold);
+      margin-bottom: 16px;
+    }
+
+    .team-bio {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      max-width: 320px;
+      font-weight: 300;
+    }
+
+    /* 7. DEPOIMENTOS/AVALIAÇÕES (TESTIMONIALS) */
+    .testimonials-section {
+      padding: 100px 0;
+      background-color: var(--color-cream);
+      border-top: 1px solid rgba(201, 169, 110, 0.15);
+    }
+
+    .testimonials-header-summary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .ratings-badge-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--color-white);
+      border: 1px solid var(--color-gold);
+      padding: 12px 24px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px var(--color-shadow-wine);
+    }
+
+    .ratings-badge-large span.stars {
+      color: #FFB800;
+      font-size: 1.2rem;
+    }
+
+    .ratings-badge-large span.text {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-primary);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      background-color: var(--color-white);
+      border-radius: 16px;
+      padding: 36px 30px;
+      box-shadow: 0 6px 20px var(--color-shadow-wine);
+      border: 1px solid rgba(201, 169, 110, 0.1);
+      position: relative;
+    }
+
+    .testimonial-stars {
+      color: #FFB800;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      font-style: italic;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--color-white);
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+    }
+
+    .author-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .author-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-primary);
+    }
+
+    .author-location {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+      font-weight: 500;
+    }
+
+    /* 8. HORÁRIOS & LOCALIZAÇÃO */
+    .hours-location-section {
+      padding: 100px 0;
+      background-color: var(--color-cream);
+      border-top: 1px solid rgba(201, 169, 110, 0.15);
+    }
+
+    .hours-location-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    /* Hours Table Column */
+    .hours-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hours-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hours-title svg {
+      width: 24px;
+      height: 24px;
+      color: var(--color-gold);
+    }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--color-white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px var(--color-shadow-wine);
+    }
+
+    .schedule-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+    }
+
+    .schedule-row:last-child {
+      border-bottom: none;
+    }
+
+    .schedule-row:nth-child(even) {
+      background-color: var(--color-cream);
+    }
+
+    .schedule-day {
+      font-weight: 700;
+      color: var(--color-text);
+      font-size: 0.95rem;
+    }
+
+    .schedule-hours {
+      font-weight: 500;
+      color: var(--color-text-light);
+      font-size: 0.95rem;
+    }
+
+    /* Active days styling */
+    .schedule-row.active .schedule-day {
+      color: var(--color-primary);
+    }
+
+    .schedule-row.active .schedule-hours {
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    /* Closed days styling */
+    .schedule-row.closed .schedule-hours {
+      color: var(--color-text-light);
+      opacity: 0.6;
+    }
+
+    /* Map Column */
+    .location-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .location-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .location-title svg {
+      width: 24px;
+      height: 24px;
+      color: var(--color-gold);
+    }
+
+    .map-placeholder-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(circle, var(--color-primary) 10%, var(--color-primary-dark) 90%);
+      background-image: radial-gradient(rgba(201, 169, 110, 0.15) 1px, transparent 1px);
+      background-size: 16px 16px;
+      background-color: var(--color-primary-dark);
+      border-radius: 12px;
+      border: 2px solid var(--color-gold);
+      box-shadow: 0 6px 20px var(--color-shadow-wine);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      text-align: center;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .map-pin-pulse {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(201, 169, 110, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      position: relative;
+      animation: pulse 2s infinite;
+    }
+
+    .map-pin-pulse svg {
+      width: 28px;
+      height: 28px;
+      color: var(--color-gold);
+      z-index: 2;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.5); }
+      70% { box-shadow: 0 0 0 20px rgba(201, 169, 110, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0); }
+    }
+
+    .map-tagline {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      margin-bottom: 4px;
+    }
+
+    .map-address-desc {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      max-width: 280px;
+    }
+
+    .address-details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background-color: var(--color-white);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 15px var(--color-shadow-wine);
+      border: 1px solid rgba(201, 169, 110, 0.1);
+    }
+
+    .address-text {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .address-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn-map-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .btn-map-directions {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      border: 1px solid var(--color-gold);
+    }
+
+    .btn-map-directions:hover {
+      background-color: var(--color-gold);
+      color: var(--color-primary);
+    }
+
+    .btn-map-call {
+      background-color: transparent;
+      color: var(--color-primary);
+      border: 1.5px solid var(--color-primary);
+    }
+
+    .btn-map-call:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    /* 9. FINAL CTA SECTION */
+    .final-cta-section {
+      padding: 80px 0;
+      color: var(--color-white);
+      text-align: center;
+    }
+
+    .cta-inner-content {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-headline {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .cta-tagline {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      font-weight: 300;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .btn-cta-whatsapp {
+      background-color: #25D366;
+      color: var(--color-white);
+      padding: 18px 32px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-cta-whatsapp:hover {
+      background-color: #1ebd59;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+    }
+
+    .btn-cta-phone {
+      background-color: transparent;
+      color: var(--color-white);
+      border: 2px solid var(--color-white);
+      padding: 18px 32px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-cta-phone:hover {
+      background-color: var(--color-white);
+      color: var(--color-primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-socials-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .cta-socials-title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-gold);
+    }
+
+    .social-icons-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-icon-circle {
+      width: 44px;
+      height: 44px;
+      background-color: rgba(253, 248, 243, 0.1);
+      border: 1px solid var(--color-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold);
+    }
+
+    .social-icon-circle:hover {
+      background-color: var(--color-gold);
+      color: var(--color-primary-dark);
+      transform: scale(1.1);
+    }
+
+    .social-icon-circle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* 10. FOOTER */
+    .footer-section {
+      background-color: var(--color-primary-dark);
+      color: var(--color-cream);
+      padding: 60px 0 30px;
+      border-top: 1px solid rgba(201, 169, 110, 0.2);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .footer-brand-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--color-white);
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+
+    .footer-brand-slogan {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--color-gold);
+      margin-bottom: 16px;
+    }
+
+    .footer-legal-tag {
+      font-size: 0.75rem;
+      opacity: 0.8;
+      max-width: 250px;
+      line-height: 1.4;
+    }
+
+    .footer-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+    }
+
+    .footer-link {
+      color: var(--color-cream);
+      font-size: 0.9rem;
+      opacity: 0.85;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .footer-link:hover {
+      color: var(--color-gold);
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 12px;
+    }
+
+    .footer-contact-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--color-gold);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(253, 248, 243, 0.1);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    /* FLOATING WHATSAPP BUTTON */
+    .whatsapp-float-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      z-index: 99;
+      animation: whatsapp-pulse 2s infinite;
+    }
+
+    .whatsapp-float-btn:hover {
+      transform: scale(1.1);
+      background-color: #1ebd59;
+    }
+
+    .whatsapp-float-btn svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    @keyframes whatsapp-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+
+    /* MEDIA QUERIES FOR RESPONSIIVENESS (Mobile-First) */
+    
+    /* Breakpoint 480px (Smartphones Landscape) */
+    @media (min-width: 480px) {
+      .hero-cta-buttons {
+        flex-direction: row;
+        justify-content: center;
+      }
+      .hero-cta-buttons a {
+        flex: 1;
+        max-width: 240px;
+      }
+      .cta-actions {
+        flex-direction: row;
+        justify-content: center;
+      }
+      .cta-actions a {
+        flex: 1;
+        max-width: 260px;
+      }
+    }
+
+    /* Breakpoint 768px (Tablets Portrait) */
+    @media (min-width: 768px) {
+      .title-main { font-size: 3.5rem; }
+      .title-sub { font-size: 2.8rem; }
+      
+      /* Header & Nav */
+      .nav-toggle-btn { display: none; }
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+      .btn-header-cta {
+        display: inline-block;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        padding: 10px 22px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: 1px solid var(--color-gold);
+      }
+      .btn-header-cta:hover {
+        background-color: var(--color-gold);
+        color: var(--color-primary);
+      }
+
+      /* Hero */
+      .hero-section { padding: 180px 0 100px; }
+      .hero-main-title { font-size: 4rem; }
+      .hero-script-title { font-size: 3.2rem; }
+      .hero-description { font-size: 1.15rem; }
+      
+      /* Credentials */
+      .credentials-flex {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      .credential-block {
+        width: 30%;
+        position: relative;
+      }
+      .credential-block:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: -15%;
+        top: 15%;
+        height: 70%;
+        width: 1px;
+        background-color: var(--color-gold);
+      }
+
+      /* Services Grid */
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Testimonials Grid */
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .testimonial-card:last-child {
+        grid-column: span 2;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Hours & Location split */
+      .hours-location-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+
+      /* Footer */
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1.5fr;
+        gap: 30px;
+      }
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    /* Breakpoint 1024px (Laptops) */
+    @media (min-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 40px;
+      }
+      .hero-content {
+        align-items: flex-start;
+        text-align: left;
+      }
+      .hero-cta-buttons {
+        justify-content: flex-start;
+      }
+
+      /* Services Grid */
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      /* Team Grid */
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1000px;
+      }
+
+      /* Testimonials Grid */
+      .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .testimonial-card:last-child {
+        grid-column: auto;
+        max-width: none;
+        margin: 0;
+      }
+
+      /* Hours & Location */
+      .hours-location-grid {
+        gap: 60px;
+      }
+
+      .cta-headline {
+        font-size: 3.4rem;
+      }
+    }
+
+    /* Breakpoint 1280px (Desktop Wide) */
+    @media (min-width: 1280px) {
+      .container {
+        padding: 0;
+      }
+      .hero-grid {
+        gap: 80px;
+      }
+      .hero-main-title { font-size: 4.5rem; }
+      .hero-script-title { font-size: 3.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/5562984392286?text=Ol%C3%A1!+Gostaria+de+agendar+uma+consulta+na+Odonto+Regina." 
+     class="whatsapp-float-btn" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Falar conosco no WhatsApp">
+    <!-- Inline SVG WhatsApp Icon -->
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.453L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.588 2.028 14.12 1.002 11.5 1.002c-5.442 0-9.87 4.372-9.874 9.802-.001 1.73.468 3.424 1.36 4.939L1.975 22.29l6.732-1.756c1.532.836 3.12 1.258 4.794 1.262zm7.766-7.294c-.269-.134-1.594-.787-1.84-.875-.246-.089-.425-.134-.605.134-.179.268-.694.875-.851 1.054-.156.178-.314.201-.583.067-1.12-.56-1.893-.974-2.657-2.282-.201-.342.201-.318.574-1.06.07-.141.036-.264-.017-.372-.054-.108-.425-1.026-.583-1.405-.152-.367-.31-.316-.425-.322-.11-.005-.236-.006-.363-.006-.127 0-.332.048-.507.24-.174.192-.665.65-.665 1.584 0 .934.679 1.836.774 1.969.095.134 1.334 2.037 3.232 2.858.451.195.803.312 1.077.399.453.144.865.123 1.193.074.365-.054 1.594-.651 1.819-1.28.225-.63.225-1.17.157-1.28-.069-.11-.246-.179-.516-.313z"/>
+    </svg>
+  </a>
+
+  <!-- 1. HEADER & NAVIGATION -->
+  <header class="header-nav" id="header">
+    <div class="container nav-container">
+      <a href="#inicio" class="logo-link" aria-label="Odonto Regina Homepage">
+        <div class="logo-icon-wrapper">
+          <!-- Smiling Tooth custom SVG -->
+          <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22,30 C19,13 38,10 48,22 C49.5,23.5 50.5,23.5 52,22 C62,10 81,13 78,30 C75.5,42.5 83,63 77,77 C72,89 60,82 52,78 C51,77.5 49,77.5 48,78 C40,82 28,89 23,77 C17,63 24.5,42.5 22,30 Z" fill="#FFFFFF" stroke="#7A1515" stroke-width="4.5" stroke-linejoin="round"/>
+            <ellipse cx="38" cy="40" rx="4.5" ry="6.5" fill="#7A1515"/>
+            <circle cx="36.5" cy="37.5" r="1.5" fill="#FFFFFF"/>
+            <ellipse cx="62" cy="40" rx="4.5" ry="6.5" fill="#7A1515"/>
+            <circle cx="60.5" cy="37.5" r="1.5" fill="#FFFFFF"/>
+            <circle cx="50" cy="48" r="2.8" fill="#7A1515"/>
+            <path d="M30,52 C30,52 50,57 70,52 C67,66 33,66 30,52 Z" fill="#7A1515"/>
+            <path d="M39,59 C43,55 57,55 61,59 C59,64.5 41,64.5 39,59 Z" fill="#FFFBF5" stroke="#7A1515" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="logo-text-wrapper">
+          <span class="logo-brand-name">ODONTO REGINA</span>
+          <span class="logo-sub">Estética e Saúde Bucal</span>
+        </div>
+      </a>
+
+      <!-- Desktop Menu -->
+      <nav class="nav-menu">
+        <a href="#inicio" class="nav-link">Início</a>
+        <a href="#servicos" class="nav-link">Serviços</a>
+        <a href="#equipe" class="nav-link">Nossa Equipe</a>
+        <a href="#avaliacoes" class="nav-link">Avaliações</a>
+        <a href="#contato" class="nav-link">Contato</a>
+      </nav>
+
+      <a href="https://wa.me/5562984392286?text=Gostaria+de+agendar+uma+consulta." 
+         class="btn-header-cta" 
+         target="_blank" 
+         rel="noopener noreferrer">Agendar Consulta</a>
+
+      <!-- Hamburger toggle button -->
+      <button class="nav-toggle-btn" id="menuToggleBtn" aria-label="Abrir menu de navegação">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu Overlay & Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="mobile-menu-drawer" id="mobileDrawer">
+    <a href="#inicio" class="nav-link mob-link">Início</a>
+    <a href="#servicos" class="nav-link mob-link">Serviços</a>
+    <a href="#equipe" class="nav-link mob-link">Nossa Equipe</a>
+    <a href="#avaliacoes" class="nav-link mob-link">Avaliações</a>
+    <a href="#contato" class="nav-link mob-link">Contato</a>
+    <a href="https://wa.me/5562984392286?text=Gostaria+de+agendar+uma+consulta." 
+       class="btn-drawer-cta" 
+       target="_blank" 
+       rel="noopener noreferrer">Agendar pelo WhatsApp</a>
+  </div>
+
+  <!-- 2. HERO SECTION -->
+  <section id="inicio" class="hero-section bg-dots">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <!-- Floating Google review pill -->
+        <div class="badge-google-ratings">
+          <span>⭐</span> 5.088 avaliações no Google
+        </div>
+        
+        <!-- Large display title + scripts subtitle combo -->
+        <h1 class="hero-main-title">TRANSFORMAMOS</h1>
+        <span class="hero-script-title">sorrisos em Goiânia</span>
+
+        <p class="hero-description">
+          Há mais de 25 anos aliando técnica refinada, tecnologia e o acolhimento que você e sua família merecem para uma saúde bucal impecável.
+        </p>
+
+        <div class="hero-cta-buttons">
+          <a href="https://wa.me/5562984392286?text=Ol%C3%A1!+Gostaria+de+agendar+uma+consulta." 
+             class="btn-hero-primary" 
+             target="_blank" 
+             rel="noopener noreferrer">Agendar pelo WhatsApp</a>
+          <a href="#servicos" class="btn-hero-secondary">Conheça nossos serviços</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-visual-frame">
+          <!-- Elegant Line Art Smile Placeholder in Gold Vector -->
+          <svg class="hero-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#C9A96E" />
+                <stop offset="100%" stop-color="#FDF8F3" />
+              </linearGradient>
+            </defs>
+            <circle cx="200" cy="200" r="170" stroke="url(#gold-gradient)" stroke-width="1.5" stroke-dasharray="12 6" opacity="0.3"/>
+            <circle cx="200" cy="200" r="140" stroke="url(#gold-gradient)" stroke-width="1" opacity="0.2"/>
+            
+            <!-- Abstract Smile shapes -->
+            <path d="M70,180 C110,240 290,240 330,180 Q200,270 70,180 Z" fill="url(#gold-gradient)" fill-opacity="0.8"/>
+            <path d="M85,183 Q200,210 315,183" stroke="#7A1515" stroke-width="3" stroke-linecap="round"/>
+            <path d="M140,188 Q200,202 260,188" stroke="#7A1515" stroke-width="2" opacity="0.7"/>
+            
+            <!-- Radiance stars -->
+            <path d="M120,110 L123,100 L130,97 L123,94 L120,84 L117,94 L110,97 L117,100 Z" fill="url(#gold-gradient)"/>
+            <path d="M280,130 L282,122 L290,120 L282,118 L280,110 L278,118 L270,120 L278,122 Z" fill="url(#gold-gradient)" opacity="0.7"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. NUMBERS/CREDENTIALS -->
+  <section class="credentials-section">
+    <div class="container credentials-flex">
+      <div class="credential-block reveal">
+        <span class="credential-number">5.088+</span>
+        <span class="credential-label">Avaliações no Google</span>
+        <div class="credential-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+      
+      <div class="credential-block reveal">
+        <span class="credential-number">2</span>
+        <span class="credential-label">Especialistas CRO-GO</span>
+        <div class="credential-stars">Dra. Alessandra & Dr. Marco</div>
+      </div>
+      
+      <div class="credential-block reveal">
+        <span class="credential-number">25+</span>
+        <span class="credential-label">Anos de Excelência em Goiânia</span>
+        <div class="credential-stars">Experiência e Confiança</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SERVICES SECTION -->
+  <section id="servicos" class="services-section">
+    <div class="container">
+      <!-- Section header with brand typography rules -->
+      <div class="section-title-container reveal">
+        <h2 class="title-main">ESTÉTICA</h2>
+        <span class="title-sub">e saúde bucal</span>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card reveal">
+          <div class="service-icon-wrapper">
+            <!-- Tooth icon SVG -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12c0-5 2-8 7-9a4 4 0 0 1 2 0c5 1 7 4 7 9 0 3-1.5 5.5-2 7.5-.5 2-1.5 2.5-3 2.5a5 5 0 0 1-3-1 5 5 0 0 1-3 1c-1.5 0-2.5-.5-3-2.5-.5-2-2-4.5-2-7.5Z"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Estética em Resina</h3>
+          <p class="service-card-desc">Facetas de resina e restaurações estéticas altamente personalizadas para corrigir e iluminar o sorriso.</p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card reveal">
+          <div class="service-icon-wrapper">
+            <!-- Sparkles Icon SVG -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v18M3 12h18M5 5l14 14M19 5L5 19"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Clareamento Dental</h3>
+          <p class="service-card-desc">Tratamento a laser em consultório ou moldeira caseira para clarear os dentes com segurança e eficácia.</p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card reveal">
+          <div class="service-icon-wrapper">
+            <!-- Grid icon for Braces SVG -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Aparelho Ortodôntico</h3>
+          <p class="service-card-desc">Alinhadores invisíveis estéticos e aparelhos tradicionais para o alinhamento funcional dos dentes.</p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card reveal">
+          <div class="service-icon-wrapper">
+            <!-- Star outline SVG -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Lentes de Contato</h3>
+          <p class="service-card-desc">Laminados cerâmicos ultrafinos (porcelana) para corrigir imperfeições de forma duradoura e natural.</p>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card reveal">
+          <div class="service-icon-wrapper">
+            <!-- Shield icon SVG -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Implantes Dentários</h3>
+          <p class="service-card-desc">Reabilitação oral completa com pinos de titânio importados e próteses fixas idênticas aos dentes naturais.</p>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card reveal">
+          <div class="service-icon-wrapper">
+            <!-- Magnifying glass SVG -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Prevenção e Limpeza</h3>
+          <p class="service-card-desc">Profilaxia profunda com ultrassom, check-up preventivo digital e aplicação de flúor contra cáries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ANTES & DEPOIS -->
+  <section class="comparison-section">
+    <div class="container">
+      <div class="section-title-container reveal">
+        <h2 class="title-main">ANTES</h2>
+        <span class="title-sub">e depois</span>
+      </div>
+
+      <div class="comparison-wrapper reveal">
+        <p class="comparison-subtitle">Estética em Resina — Fechamento de Diastema</p>
+        
+        <!-- Interactive Drag Comparison Slider Frame -->
+        <div class="slider-viewport">
+          <!-- BEFORE STATE: Open Gap Diastema (Right side exposed by default) -->
+          <div class="slider-before">
+            <img src="antes.png" alt="Antes do fechamento de diastema (com espaço)">
+            <div class="slider-badge badge-before-label">Antes</div>
+          </div>
+
+          <!-- AFTER STATE: Perfectly Closed Resin Diastema (Left side overlayed) -->
+          <div class="slider-after" id="afterSlide">
+            <img src="depois.png" alt="Depois do fechamento de diastema (sem espaço)">
+            <div class="slider-badge badge-after-label">Depois</div>
+          </div>
+
+          <!-- Divider Slider Bar and Drag Button -->
+          <div class="slider-handle-bar" id="sliderHandle"></div>
+          <div class="slider-handle-button" id="sliderBtn">
+            <!-- Inline SVG Arrow Icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 7L3 12L8 17M16 7L21 12L16 17"/>
+            </svg>
+          </div>
+
+          <!-- Native input overlay for mobile gestures -->
+          <input type="range" min="0" max="100" value="50" class="slider-native-input" id="sliderRange" aria-label="Arraste para comparar antes e depois">
+        </div>
+
+        <!-- Signature/Watermark element for Dra. Alessandra -->
+        <div class="signature-watermark-wrapper">
+          <div class="signature-watermark">Dra. Alessandra Agnello</div>
+          <div class="signature-label">Responsável Técnica</div>
+        </div>
+
+        <a href="https://wa.me/5562984392286?text=Ol%C3%A1%21+Gostaria+de+ver+mais+casos+de+antes+e+depois+de+est%C3%A9tica+dental." 
+           class="btn-comparison-cta" 
+           target="_blank" 
+           rel="noopener noreferrer">Ver mais casos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. EQUIPE -->
+  <section id="equipe" class="team-section bg-dots bg-dark">
+    <div class="container">
+      <div class="section-title-container reveal">
+        <h2 class="title-main">NOSSA</h2>
+        <span class="title-sub">equipe</span>
+      </div>
+
+      <div class="team-grid">
+        <!-- Professional 1: Dra. Alessandra -->
+        <div class="team-card reveal">
+          <div class="avatar-wrapper">
+            <img src="dra_alessandra.png" alt="Dra. Alessandra Agnello" class="avatar-img">
+          </div>
+          <h3 class="team-name">Dra. Alessandra Agnello</h3>
+          <span class="team-cro">CRO-GO 5983</span>
+          <p class="team-bio">Especialista em Odontologia Estética e Prótese Dentária, com foco em transformações de sorrisos com facetas de resina e lentes cerâmicas.</p>
+        </div>
+
+        <!-- Professional 2: Dr. Marco -->
+        <div class="team-card reveal">
+          <div class="avatar-wrapper">
+            <img src="dr_marco.png" alt="Dr. Marco Agnello" class="avatar-img">
+          </div>
+          <h3 class="team-name">Dr. Marco Agnello</h3>
+          <span class="team-cro">CRO-GO</span>
+          <p class="team-bio">Especialista em Implantodontia e Reabilitação Oral, focado em cirurgias guiadas, enxertos ósseos e implantes rápidos sem dor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DEPOIMENTOS/AVALIAÇÕES -->
+  <section id="avaliacoes" class="testimonials-section">
+    <div class="container">
+      <div class="section-title-container reveal">
+        <h2 class="title-main">AVALIAÇÕES</h2>
+        <span class="title-sub">de quem confia</span>
+      </div>
+
+      <div class="testimonials-header-summary reveal">
+        <div class="ratings-badge-large">
+          <span class="stars">⭐⭐⭐⭐⭐</span>
+          <span class="text">5.0 — 5.088 avaliações no Google</span>
+        </div>
+      </div>
+
+      <div class="testimonials-grid">
+        <!-- Review 1 -->
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">
+            "Fiz minhas facetas em resina com a Dra. Alessandra e o resultado ficou inacreditável de tão natural. A estrutura da clínica é linda e o atendimento impecável."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background-color: var(--color-primary);">MS</div>
+            <div class="author-info">
+              <span class="author-name">Mariana Souza</span>
+              <span class="author-location">Setor Bueno, Goiânia</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">
+            "Tinha pavor de cirurgia, mas o Dr. Marco fez meu implante de forma super tranquila e rápida. Não senti dor alguma e a recuperação foi maravilhosa. Excelente profissional!"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background-color: var(--color-gold);">RA</div>
+            <div class="author-info">
+              <span class="author-name">Rodrigo Alves</span>
+              <span class="author-location">Setor Oeste, Goiânia</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">
+            "Melhor clínica de Goiânia! Pontualidade britânica, ambiente limpo e acolhedor, profissionais atenciosos que explicam cada passo. Minha limpeza e clareamento ficaram perfeitos."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background-color: var(--color-text-light);">CB</div>
+            <div class="author-info">
+              <span class="author-name">Camila Borges</span>
+              <span class="author-location">Jardim Goiás, Goiânia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. HORÁRIOS & LOCALIZAÇÃO -->
+  <section id="contato" class="hours-location-section">
+    <div class="container">
+      <div class="section-title-container reveal">
+        <h2 class="title-main">CONTATO</h2>
+        <span class="title-sub">e localização</span>
+      </div>
+
+      <div class="hours-location-grid">
+        <!-- Schedule Column -->
+        <div class="hours-container reveal">
+          <h3 class="hours-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            Horários de Atendimento
+          </h3>
+
+          <div class="schedule-table">
+            <div class="schedule-row active">
+              <span class="schedule-day">Segunda-feira</span>
+              <span class="schedule-hours">08h00 às 17h00</span>
+            </div>
+            <div class="schedule-row active">
+              <span class="schedule-day">Terça-feira</span>
+              <span class="schedule-hours">08h00 às 17h00</span>
+            </div>
+            <div class="schedule-row active">
+              <span class="schedule-day">Quarta-feira</span>
+              <span class="schedule-hours">08h00 às 17h00</span>
+            </div>
+            <div class="schedule-row active">
+              <span class="schedule-day">Quinta-feira</span>
+              <span class="schedule-hours">08h00 às 17h00</span>
+            </div>
+            <div class="schedule-row active">
+              <span class="schedule-day">Sexta-feira</span>
+              <span class="schedule-hours">08h00 às 17h00</span>
+            </div>
+            <div class="schedule-row active">
+              <span class="schedule-day">Sábado</span>
+              <span class="schedule-hours">08h00 às 11h00</span>
+            </div>
+            <div class="schedule-row closed">
+              <span class="schedule-day">Domingo</span>
+              <span class="schedule-hours">Fechado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location/Map Column -->
+        <div class="location-container reveal">
+          <h3 class="location-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            Onde Estamos
+          </h3>
+
+          <!-- Map placeholder vector frame -->
+          <div class="map-placeholder-frame">
+            <div class="map-pin-pulse">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <span class="map-tagline">Vila Regina, Goiânia</span>
+            <p class="map-address-desc">Próximo aos principais acessos do bairro. Estacionamento facilitado no local.</p>
+          </div>
+
+          <!-- Text details and actions -->
+          <div class="address-details">
+            <span class="address-text">
+              📍 Av. Inhumas, nº 60 - Vila Regina, Goiânia - GO, 74453-540
+            </span>
+            <div class="address-links">
+              <a href="https://maps.google.com/?q=Av.+Inhumas,+60+-+Vila+Regina,+Goiania+-+GO,+74453-540" 
+                 class="btn-map-action btn-map-directions" 
+                 target="_blank" 
+                 rel="noopener noreferrer">
+                Como Chegar (Google Maps)
+              </a>
+              <a href="tel:+556232975552" class="btn-map-action btn-map-call">
+                Ligar na Clínica: (62) 3297-5552
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FINAL CTA SECTION -->
+  <section class="final-cta-section bg-dots">
+    <div class="container cta-inner-content">
+      <h2 class="cta-headline reveal">PRONTO PARA CONQUISTAR O SORRISO DOS SEUS SONHOS?</h2>
+      <p class="cta-tagline reveal">
+        Fale diretamente conosco e encontre a melhor data e horário para a sua avaliação. Seu sorriso é a nossa especialidade!
+      </p>
+
+      <div class="cta-actions reveal">
+        <a href="https://wa.me/5562984392286?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio." 
+           class="btn-cta-whatsapp" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          <!-- WhatsApp Icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.453L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.588 2.028 14.12 1.002 11.5 1.002c-5.442 0-9.87 4.372-9.874 9.802-.001 1.73.468 3.424 1.36 4.939L1.975 22.29l6.732-1.756c1.532.836 3.12 1.258 4.794 1.262zm7.766-7.294c-.269-.134-1.594-.787-1.84-.875-.246-.089-.425-.134-.605.134-.179.268-.694.875-.851 1.054-.156.178-.314.201-.583.067-1.12-.56-1.893-.974-2.657-2.282-.201-.342.201-.318.574-1.06.07-.141.036-.264-.017-.372-.054-.108-.425-1.026-.583-1.405-.152-.367-.31-.316-.425-.322-.11-.005-.236-.006-.363-.006-.127 0-.332.048-.507.24-.174.192-.665.65-.665 1.584 0 .934.679 1.836.774 1.969.095.134 1.334 2.037 3.232 2.858.451.195.803.312 1.077.399.453.144.865.123 1.193.074.365-.054 1.594-.651 1.819-1.28.225-.63.225-1.17.157-1.28-.069-.11-.246-.179-.516-.313z"/>
+          </svg>
+          Chamar no WhatsApp
+        </a>
+        <a href="tel:+556232975552" class="btn-cta-phone">
+          <!-- Telephone Icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Ligar: (62) 3297-5552
+        </a>
+      </div>
+
+      <div class="cta-socials-wrapper reveal">
+        <span class="cta-socials-title">Acompanhe nossas novidades</span>
+        <div class="social-icons-row">
+          <a href="https://instagram.com/odontoreginago" 
+             class="social-icon-circle" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             aria-label="Seguir no Instagram">
+            <!-- Instagram Icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://facebook.com/odontoregina" 
+             class="social-icon-circle" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             aria-label="Curtir no Facebook">
+            <!-- Facebook Icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FOOTER -->
+  <footer class="footer-section">
+    <div class="container footer-grid">
+      
+      <!-- Logo column -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22,30 C19,13 38,10 48,22 C49.5,23.5 50.5,23.5 52,22 C62,10 81,13 78,30 C75.5,42.5 83,63 77,77 C72,89 60,82 52,78 C51,77.5 49,77.5 48,78 C40,82 28,89 23,77 C17,63 24.5,42.5 22,30 Z" fill="#FFFFFF" stroke="#C9A96E" stroke-width="4.5" stroke-linejoin="round"/>
+              <ellipse cx="38" cy="40" rx="4.5" ry="6.5" fill="#7A1515"/>
+              <circle cx="36.5" cy="37.5" r="1.5" fill="#FFFFFF"/>
+              <ellipse cx="62" cy="40" rx="4.5" ry="6.5" fill="#7A1515"/>
+              <circle cx="60.5" cy="37.5" r="1.5" fill="#FFFFFF"/>
+              <circle cx="50" cy="48" r="2.8" fill="#7A1515"/>
+              <path d="M30,52 C30,52 50,57 70,52 C67,66 33,66 30,52 Z" fill="#7A1515"/>
+              <path d="M39,59 C43,55 57,55 61,59 C59,64.5 41,64.5 39,59 Z" fill="#FFFBF5" stroke="#7A1515" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <span class="footer-brand-title">ODONTO REGINA</span>
+        </div>
+        <span class="footer-brand-slogan">"Seu sorriso, nossa especialidade"</span>
+        <p class="footer-legal-tag">
+          Clínica Odontológica Odonto Regina LTDA.<br>
+          Resp. Técnicos: Dra. Alessandra Agnello (CRO-GO 5983) e Dr. Marco Agnello.
+        </p>
+      </div>
+
+      <!-- Links Column -->
+      <div class="footer-links-col">
+        <h4 class="footer-col-title">Navegação</h4>
+        <a href="#inicio" class="footer-link">Início</a>
+        <a href="#servicos" class="footer-link">Serviços</a>
+        <a href="#equipe" class="footer-link">Nossa Equipe</a>
+        <a href="#avaliacoes" class="footer-link">Avaliações</a>
+        <a href="#contato" class="footer-link">Contato</a>
+      </div>
+
+      <!-- Contacts Column -->
+      <div class="footer-links-col">
+        <h4 class="footer-col-title">Fale Conosco</h4>
+        <div class="footer-contact-item">
+          <!-- Pin icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Av. Inhumas, nº 60 - Vila Regina, Goiânia - GO, 74453-540</span>
+        </div>
+        <div class="footer-contact-item">
+          <!-- WhatsApp logo outline -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          <span>WhatsApp: (62) 98439-2286</span>
+        </div>
+        <div class="footer-contact-item">
+          <!-- Phone outline -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>Telefone: (62) 3297-5552</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="container footer-bottom">
+      <span>© 2025-2026 Odonto Regina — Todos os direitos reservados.</span>
+      <span>Desenvolvido de forma ética e profissional.</span>
+    </div>
+  </footer>
+
+
+  <!-- JAVASCRIPT FOR INTERACTION -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- MOBILE NAVIGATION HEADER ---
+      const menuToggleBtn = document.getElementById('menuToggleBtn');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const drawerOverlay = document.getElementById('drawerOverlay');
+      const mobLinks = document.querySelectorAll('.mob-link');
+
+      function toggleDrawer() {
+        menuToggleBtn.classList.toggle('open');
+        mobileDrawer.classList.toggle('open');
+        drawerOverlay.classList.toggle('open');
+        // Prevent body scrolling when menu is active
+        document.body.style.overflow = mobileDrawer.classList.contains('open') ? 'hidden' : '';
+      }
+
+      function closeDrawer() {
+        menuToggleBtn.classList.remove('open');
+        mobileDrawer.classList.remove('open');
+        drawerOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      menuToggleBtn.addEventListener('click', toggleDrawer);
+      drawerOverlay.addEventListener('click', closeDrawer);
+      mobLinks.forEach(link => link.addEventListener('click', closeDrawer));
+
+
+      // --- STICKY NAV ON SCROLL ---
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+
+      // --- INTERACTIVE BEFORE & AFTER SLIDER ---
+      const sliderRange = document.getElementById('sliderRange');
+      const afterSlide = document.getElementById('afterSlide');
+      const sliderHandle = document.getElementById('sliderHandle');
+      const sliderBtn = document.getElementById('sliderBtn');
+
+      function updateSlider() {
+        const val = sliderRange.value;
+        // Clip the 'After' overlay from left(0%) to current slider percentage (val%)
+        afterSlide.style.clipPath = `polygon(0 0, ${val}% 0, ${val}% 100%, 0 100%)`;
+        // Move the visual vertical dividing bar and handle button
+        sliderHandle.style.left = `${val}%`;
+        sliderBtn.style.left = `${val}%`;
+      }
+
+      // Track input changes for real-time responsiveness
+      sliderRange.addEventListener('input', updateSlider);
+      sliderRange.addEventListener('change', updateSlider);
+      
+      // Initialize on load
+      updateSlider();
+
+
+      // --- INTERSECTION OBSERVER FOR FADE-IN ANIMATIONS ---
+      const revealElements = document.querySelectorAll('.reveal');
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            // Element is loaded, stop tracking it to optimize resources
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1, // Element is 10% visible
+        rootMargin: '0px 0px -50px 0px' // Trigger slightly before it gets fully on screen
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+    });
+  </script>
+</body>
+</html>
